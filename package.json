@@ -2,21 +2,21 @@
   "name": "efemerides",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fly-examples/hellonode.git"
+    "url": "git+https://github.com/elkinnarvaez/efemerides.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fly-examples/hellonode/issues"
+    "url": "https://github.com/elkinnarvaez/efemerides/issues"
   },
-  "homepage": "https://github.com/fly-examples/hellonode#readme",
+  "homepage": "https://github.com/elkinnarvaez/efemerides#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
