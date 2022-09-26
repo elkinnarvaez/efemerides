@@ -1,4 +1,4 @@
-fly-cli-config.txt
 package-lock.json
-node_modules
+/node_modules
+fly-cli-config.txt
 launch-output.txt

@@ -19,5 +19,8 @@
   "homepage": "https://github.com/elkinnarvaez/efemerides#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0"
   }
 }
