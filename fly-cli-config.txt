@@ -1,3 +1,0 @@
-export FLYCTL_INSTALL="/home/elkinnarvaez/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
-flyctl auth login
