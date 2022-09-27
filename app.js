@@ -1,15 +1,6 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 5000;
+require('dotenv').config(); // Load environment variables from .env file
+const Server = require('./models/server');
 
-app.get(['/', '/:name'], (req, res) => {
-  greeting = '<h1>Hello From Node on Fly!</h1>';
-  name = req.params['name'];
-  if (name) {
-    res.send(greeting + '</br>and hello to ' + name);
-  } else {
-    res.send(greeting);
-  }
-});
+const server = new Server();
 
-app.listen(port, () => console.log(`HelloNode app listening on port ${port}!`));
+server.listen();
