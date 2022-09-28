@@ -1,5 +1,3 @@
 package-lock.json
 /node_modules
-fly-cli-config.txt
-launch-output-1.txt
-.env
+launch-output.txt
