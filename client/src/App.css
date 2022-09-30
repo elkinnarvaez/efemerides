@@ -37,6 +37,24 @@
   }
 }
 
-.main-page{
+.base-page{
   padding: 5em;
+}
+
+.homepage{
+  background-color: white;
+  padding: 3em;
+}
+
+.homepage .main-header{
+  padding-bottom: 1em;
+}
+
+.orbital-elements{
+  background-color: white;
+  padding: 3em;
+}
+
+.orbital-elements .main-header{
+  padding-bottom: 1em;
 }
