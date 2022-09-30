@@ -12,7 +12,7 @@ git clone https://github.com/elkinnarvaez/efemerides.git
 
 In order to run this application you have to install [Node.js](https://nodejs.org/en/download/).
 
-Running the application locally will mean that you'll only have access to it from your local machine, not from the internet.
+Running the application locally means that you'll only have access to it from your local machine, not from the internet.
 
 1. Make sure that the *package.json* at the root folder has the following scripts:
 
@@ -39,8 +39,6 @@ Running the application locally will mean that you'll only have access to it fro
 
     ```
     cd client
-    ```
-    ```
     npm install
     ```
 
@@ -50,13 +48,23 @@ Running the application locally will mean that you'll only have access to it fro
     npm run dev
     ```
 
+## Build client app
+
+As the front-end side of the application is developed in [React](https://reactjs.org/), it's required to bundle, minify and optimize all front end code into HTML, CSS and JavaScript files in the build folder. You can do that by running the following command in your terminal:
+
+```
+npm run build
+```
+
 ## Deploy app to Fly.io
 
 In order to deploy this application, first you have create an account in [Fly.io](https://fly.io/app/sign-in), or sign in if you already have one.
 
+It's also required that you've already built the client-side React application before deploying. See [Build Client App](build-client-app) if you haven't done that.
+
 1. Follow [these](https://fly.io/docs/hands-on/install-flyctl/) steps to download Fly.io's command line tool (flyctl). Skip this step if you already have it installed.
 
-2. If you didn't add flyctl to your PATH environment variable, run these two commands everytime you open your terminal:
+2. If you didn't add flyctl to your PATH environment variable during installation, run these two commands everytime you open your terminal:
 
     ```
     export FLYCTL_INSTALL="/home/elkinnarvaez/.fly"
@@ -81,13 +89,7 @@ In order to deploy this application, first you have create an account in [Fly.io
     }
     ```
 
-5. Build the client's side application.
-
-    ```
-    npm run build
-    ```
-
-6. Deploy the app.
+5. Deploy the app.
 
     Deploying the application means that you are uploading the project to a cloud server that will give you access to the app from the internet.
 
@@ -99,7 +101,7 @@ In order to deploy this application, first you have create an account in [Fly.io
         flyctl launch
         ```
 
-        When running this command you will be prompted several options that you will have choose to your own convenience. Please take a look at [Fly.io's pricing](https://fly.io/docs/about/pricing/).
+        When running this command you will be prompted several options that you will have choose to your own convenience. Please take a look at [Fly.io's pricing](https://fly.io/docs/about/pricing/). For the application to work properly, it is required that you attach a database to it (you will be promted that option when launching, or you can choose to attach it later).
     
     * Make changes to deployment.
 
@@ -108,3 +110,11 @@ In order to deploy this application, first you have create an account in [Fly.io
         ```
         flyctl deploy
         ```
+
+## Connect to PostgreSQL database
+
+In order to access the apps database from your local computer, please run the following command:
+
+```
+flyctl postgres connect -a efemerides-db
+```
