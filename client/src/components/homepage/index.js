@@ -8,18 +8,7 @@ function Homepage() {
     const planet = await searchPlanets({ name });
     setPlanetName(planet.planetName);
   };
-  return (
-    <div>
-      <p>Test homepage!</p>
-      <p>Data retreived from API call:</p>
-      <input
-        type="submit"
-        onClick={onClickGetPlanet}
-        value="Get planet"
-      ></input>
-      <p>{planetName}</p>
-    </div>
-  );
+  return <div class="">Efemérides Astrónomicas</div>;
 }
 
 export default Homepage;
