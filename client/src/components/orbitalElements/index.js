@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchAllOrbitalElements } from './api';
+import { fetchAllOrbitalElements } from '../../api';
 
 function OrbitalElements() {
   const [orbitalElementsList, setOrbitalElementsList] = useState([]);
