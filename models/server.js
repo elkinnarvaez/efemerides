@@ -7,7 +7,7 @@ class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.paths = {
-      homepage: '/api/homepage',
+      orbitalElements: '/api/orbital-elements',
     };
 
     this.middlewares();
@@ -24,7 +24,10 @@ class Server {
 
   // Bind controllers to routes
   routes() {
-    this.app.use(this.paths.homepage, require('../routes/homepage'));
+    this.app.use(
+      this.paths.orbitalElements,
+      require('../routes/orbitalElements')
+    );
     // Catch all requests that don't match any route
     this.app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../client/build/index.html'));

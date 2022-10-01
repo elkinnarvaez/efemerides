@@ -7,7 +7,7 @@ function Menu({ onClickHomepage, onClickOrbitalElements }) {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand onClick={onClickHomepage}>
           <img
             alt=""
             src="/astronomy-logo2.png"

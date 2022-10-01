@@ -13,7 +13,7 @@ function App() {
     setShowOrbitalElements(false);
   };
 
-  const onClickOrbitalElements = () => {
+  const onClickOrbitalElements = async () => {
     setShowHomepage(false);
     setShowOrbitalElements(true);
   };

@@ -1,5 +1,5 @@
-export async function searchPlanets({ name }) {
-  return await fetch(`/api/homepage/getPlanets/${name}`, {
+export async function fetchAllOrbitalElements() {
+  return await fetch('/api/orbital-elements/fetch-all', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   })
