@@ -1,15 +1,17 @@
 export async function fetchAllOrbitalElements() {
-  return await fetch('/api/orbital-elements/fetch-all', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw response.error;
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch('/api/orbital-elements/fetch-all', {
+        method: 'GET',
+      });
+      const json = await response.json();
+      if (response.ok) {
+        return resolve(json.orbitalElements);
+      } else {
+        throw new Error(json.message);
       }
-      return response.json();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    } catch (err) {
+      return reject(err);
+    }
+  });
 }

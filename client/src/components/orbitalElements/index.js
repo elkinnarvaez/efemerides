@@ -4,12 +4,15 @@ import { fetchAllOrbitalElements } from '../../api';
 function OrbitalElements() {
   const [orbitalElementsList, setOrbitalElementsList] = useState([]);
 
-  const onGetAllOrbitalElements = async () => {
-    const json = await fetchAllOrbitalElements();
-    setOrbitalElementsList(json.orbitalElements);
+  const onPageRenderAsync = async () => {
+    try {
+      setOrbitalElementsList(await fetchAllOrbitalElements());
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  onGetAllOrbitalElements();
+  onPageRenderAsync();
 
   return (
     <div className="orbital-elements">

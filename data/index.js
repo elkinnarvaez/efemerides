@@ -1,14 +1,15 @@
 const { Client } = require('pg');
 
-const connectionURI = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL;
 
 const connectToDatabaseClient = async () => {
   return new Promise(async (resolve, reject) => {
     try {
       const client = new Client({
-        connectionURI,
+        connectionString,
       });
-      return resolve(await client.connect());
+      await client.connect();
+      return resolve(client);
     } catch (error) {
       return reject(error);
     }
