@@ -4,21 +4,25 @@ import { fetchAllOrbitalElements } from '../../api';
 function OrbitalElements() {
   const [orbitalElementsList, setOrbitalElementsList] = useState([]);
 
-  const onLoadPage = async () => {
+  const onGetAllOrbitalElements = async () => {
     const json = await fetchAllOrbitalElements();
     setOrbitalElementsList(json.orbitalElements);
     console.log(orbitalElementsList);
   };
-  onLoadPage();
+
+  onGetAllOrbitalElements();
 
   return (
     <div className="orbital-elements">
       <h1 className="main-header">Parámetros Orbitales</h1>
-      {orbitalElementsList.forEach((orbitalElement) => {
-        <div>
-          <p>orbitalElement.planetName</p>
-          <p>orbitalElement.altidud</p>
-        </div>;
+      {orbitalElementsList.map((orbitalElement) => {
+        const { planetName, altitud } = orbitalElement;
+        return (
+          <div>
+            <p>{planetName}</p>
+            <p>{altitud}</p>
+          </div>
+        );
       })}
     </div>
   );
