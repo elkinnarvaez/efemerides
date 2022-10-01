@@ -7,7 +7,6 @@ function OrbitalElements() {
   const onGetAllOrbitalElements = async () => {
     const json = await fetchAllOrbitalElements();
     setOrbitalElementsList(json.orbitalElements);
-    console.log(orbitalElementsList);
   };
 
   onGetAllOrbitalElements();

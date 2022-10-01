@@ -5,9 +5,8 @@ export async function fetchAllOrbitalElements() {
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error('HTTP status ' + response.status);
+        throw response.error;
       }
-
       return response.json();
     })
     .catch((err) => {
