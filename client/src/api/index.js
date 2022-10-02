@@ -6,6 +6,8 @@ export async function fetchAllOrbitalElements() {
       });
       const json = await response.json();
       if (response.ok) {
+        console.log('ok...');
+        console.log(json.orbitalElements);
         return resolve(json.orbitalElements);
       } else {
         throw new Error(json.message);

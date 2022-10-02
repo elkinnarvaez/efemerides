@@ -7,3 +7,6 @@ CREATE TABLE orbital_elements (
 	perihelionArgument NUMERIC(8, 4),
 	perihelionPassingTime NUMERIC(8, 4)
 );
+
+INSERT INTO orbital_elements(planetName, meanDistanceToSun, eccentricity, inclination, ascendingNodeLongitude, perihelionArgument, perihelionPassingTime)
+VALUES ('Tierra', 1.0, 0.0167, 0.000, 0.5, 0.0, 4.3);

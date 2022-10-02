@@ -18,11 +18,10 @@ function OrbitalElements() {
     <div className="orbital-elements">
       <h1 className="main-header">Parámetros Orbitales</h1>
       {orbitalElementsList.map((orbitalElement) => {
-        const { planetName, altitud } = orbitalElement;
+        const { planetname } = orbitalElement;
         return (
           <div>
-            <p>{planetName}</p>
-            <p>{altitud}</p>
+            <p>{planetname}</p>
           </div>
         );
       })}
