@@ -62,7 +62,13 @@ Running the application locally means that you'll only have access to it from yo
         sudo service postgresql status
         ```
 
-4. Run the application.
+4. Connect to database (you can skip this step)
+
+    ```
+    sudo -u postgres psql
+    ```
+
+5. Run the application.
 
     ```
     npm run dev
