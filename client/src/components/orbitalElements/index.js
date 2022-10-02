@@ -3,25 +3,43 @@ import { fetchAllOrbitalElements } from '../../api';
 
 function OrbitalElements() {
   const [orbitalElementsList, setOrbitalElementsList] = useState([]);
+  const [firstPageLoad, setFirstPageLoad] = useState(true);
 
-  const onPageRenderAsync = async () => {
+  const onPageLoadAsync = async () => {
     try {
-      setOrbitalElementsList(await fetchAllOrbitalElements());
+      if (firstPageLoad) {
+        setOrbitalElementsList(await fetchAllOrbitalElements());
+        setFirstPageLoad(false);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  onPageRenderAsync();
+  onPageLoadAsync();
 
   return (
     <div className="orbital-elements">
       <h1 className="main-header">Parámetros Orbitales</h1>
       {orbitalElementsList.map((orbitalElement) => {
-        const { planetname } = orbitalElement;
+        const {
+          planetname,
+          meandistancetosun,
+          eccentricity,
+          inclination,
+          ascendingnodelongitude,
+          perihelionargument,
+          perihelionpassingrime,
+        } = orbitalElement;
         return (
-          <div>
+          <div key={planetname}>
             <p>{planetname}</p>
+            <p>{meandistancetosun}</p>
+            <p>{eccentricity}</p>
+            <p>{inclination}</p>
+            <p>{ascendingnodelongitude}</p>
+            <p>{perihelionargument}</p>
+            <p>{perihelionpassingrime}</p>
           </div>
         );
       })}
