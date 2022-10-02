@@ -21,6 +21,7 @@ const fetchAll = async (req, res = response) => {
       ],
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       message: 'Orbital elements could not be retrieved successfully',
       error: err,
