@@ -42,7 +42,27 @@ Running the application locally means that you'll only have access to it from yo
     npm install
     ```
 
-3. Run the application.
+3. Start/stop runnig local database
+
+    - Start running your database
+    
+        ```
+        sudo service postgresql start
+        ```
+
+    - Stop running your database
+
+        ```
+        sudo service postgresql stop
+        ```
+
+    - Check status of database
+
+        ```
+        sudo service postgresql status
+        ```
+
+4. Run the application.
 
     ```
     npm run dev
