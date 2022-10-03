@@ -9,4 +9,4 @@ CREATE TABLE orbital_elements (
 );
 
 INSERT INTO orbital_elements(planetName, meanDistanceToSun, eccentricity, inclination, ascendingNodeLongitude, perihelionArgument, perihelionPassingTime)
-VALUES ('Tierra', 1.0, 0.0167, 0.000, 0.5, 0.0, 4.3);
+VALUES ('Mercurio', 1.0, 0.0167, 0.000, 0.5, 0.0, 4.3);
