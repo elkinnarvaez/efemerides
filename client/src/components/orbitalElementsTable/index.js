@@ -106,15 +106,17 @@ export default function OrbitalElementsTable({ orbitalElementsList }) {
 
   const processRowUpdate = React.useCallback(
     async (newRow, oldRow) => {
-      await validateRowUpdate(newRow);
-      await updateOrbitalElement({
-        row: newRow,
-        oldPlanetName: oldRow.planetName,
-      });
-      setSnackbar({
-        children: 'Campo actualizado satisfactoriamente',
-        severity: 'success',
-      });
+      if (JSON.stringify(newRow) !== JSON.stringify(oldRow)) {
+        await validateRowUpdate(newRow);
+        await updateOrbitalElement({
+          row: newRow,
+          oldPlanetName: oldRow.planetName,
+        });
+        setSnackbar({
+          children: 'Campo actualizado satisfactoriamente',
+          severity: 'success',
+        });
+      }
       return newRow;
     },
     [validateRowUpdate]

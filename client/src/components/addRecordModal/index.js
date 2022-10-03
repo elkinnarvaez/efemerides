@@ -69,7 +69,7 @@ export default function AddRecordModal({
         children: 'Registro creado satisfactoriamente',
         severity: 'success',
       });
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setShowAddRecordModal(false);
       setLoadPage(true);
     } catch (err) {
