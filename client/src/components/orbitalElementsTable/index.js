@@ -17,7 +17,7 @@ const useUpdateValidation = () => {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (row.planetName?.trim() === '') {
-          return reject(new Error('El campo de planeta no puede esta vacío'));
+          return reject(new Error('El campo de planeta no puede estar vacío'));
         } else if (
           typeof row.meanDistanceToSun !== 'number' ||
           typeof row.eccentricity !== 'number' ||
