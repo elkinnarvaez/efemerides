@@ -1,7 +1,7 @@
 const { response } = require('express');
 const { formatRows } = require('./helpers');
 const { connectToDatabaseClient } = require('../data/index');
-const { selectAll, update } = require('../data/operations');
+const { selectAll, update, insert } = require('../data/operations');
 
 const fetchAll = async (req, res = response) => {
   try {
@@ -35,7 +35,24 @@ const updateRecord = async (req, res = response) => {
   }
 };
 
+const createRecord = async (req, res = response) => {
+  try {
+    const { row } = req.body;
+    const client = await connectToDatabaseClient();
+    await insert(client, row);
+    res.status(200).json({
+      message: 'Record created successfully',
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: err.message || 'Record failed to be created',
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   fetchAll,
   updateRecord,
+  createRecord,
 };

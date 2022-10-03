@@ -58,3 +58,24 @@
 .orbital-elements .main-header{
   padding-bottom: 1em;
 }
+
+.add-record-modal-button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1em;
+}
+
+.add-record-form{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 1.2em;
+  margin: auto;
+}
+
+.add-record-button{
+  display: flex;
+  flex-direction: column;
+  padding-top: 2em;
+}

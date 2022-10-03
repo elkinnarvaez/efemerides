@@ -18,19 +18,6 @@ const useUpdateValidation = () => {
       setTimeout(() => {
         if (row.planetName?.trim() === '') {
           return reject(new Error('El campo de planeta no puede estar vacío'));
-        } else if (
-          typeof row.meanDistanceToSun !== 'number' ||
-          typeof row.eccentricity !== 'number' ||
-          typeof row.inclination !== 'number' ||
-          typeof row.ascendingNodeLongitude !== 'number' ||
-          typeof row.perihelionArgument !== 'number' ||
-          typeof row.perihelionPassingTime !== 'number'
-        ) {
-          return reject(
-            new Error(
-              'Todos los parámetros orbitales deben ser valores numéricos'
-            )
-          );
         } else {
           return resolve(true);
         }
@@ -43,7 +30,7 @@ const columns = [
   {
     field: 'planetName',
     headerName: 'Planeta',
-    width: 100,
+    width: 125,
     align: 'left',
     headerAlign: 'left',
     editable: true,
@@ -62,7 +49,7 @@ const columns = [
     field: 'eccentricity',
     headerName: 'Excentricidad',
     type: 'number',
-    width: 160,
+    width: 130,
     editable: true,
     align: 'left',
     headerAlign: 'left',
@@ -72,7 +59,7 @@ const columns = [
     field: 'inclination',
     headerName: 'Inclinación',
     type: 'number',
-    width: 160,
+    width: 120,
     editable: true,
     align: 'left',
     headerAlign: 'left',
@@ -82,7 +69,7 @@ const columns = [
     field: 'ascendingNodeLongitude',
     headerName: 'Longitud del nodo ascendente',
     type: 'number',
-    width: 160,
+    width: 180,
     editable: true,
     align: 'left',
     headerAlign: 'left',
@@ -102,7 +89,7 @@ const columns = [
     field: 'perihelionPassingTime',
     headerName: 'Tiempo de paso por el perihelio',
     type: 'number',
-    width: 200,
+    width: 220,
     editable: true,
     align: 'left',
     headerAlign: 'left',
