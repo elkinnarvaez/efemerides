@@ -2,24 +2,61 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { updateOrbitalElement } from '../../api';
+
+const formatOrbitalElementValue = (params) => {
+  if (params.value == null) {
+    return '';
+  } else {
+    return params.value.toFixed(3);
+  }
+};
+
+const useUpdateValidation = () => {
+  return React.useCallback((row) => {
+    return new Promise((resolve, reject) =>
+      setTimeout(() => {
+        if (row.planetName?.trim() === '') {
+          return reject(new Error('El campo de planeta no puede esta vacío'));
+        } else if (
+          typeof row.meanDistanceToSun !== 'number' ||
+          typeof row.eccentricity !== 'number' ||
+          typeof row.inclination !== 'number' ||
+          typeof row.ascendingNodeLongitude !== 'number' ||
+          typeof row.perihelionArgument !== 'number' ||
+          typeof row.perihelionPassingTime !== 'number'
+        ) {
+          return reject(
+            new Error(
+              'Todos los parámetros orbitales deben ser valores numéricos'
+            )
+          );
+        } else {
+          return resolve(true);
+        }
+      }, 200)
+    );
+  }, []);
+};
 
 const columns = [
   {
-    field: 'planetname',
+    field: 'planetName',
     headerName: 'Planeta',
-    width: 80,
+    width: 100,
     align: 'left',
     headerAlign: 'left',
     editable: true,
   },
   {
-    field: 'meandistancetosun',
+    field: 'meanDistanceToSun',
     headerName: 'Distancia media al sol',
     type: 'number',
     width: 160,
     align: 'left',
     headerAlign: 'left',
     editable: true,
+    valueFormatter: formatOrbitalElementValue,
   },
   {
     field: 'eccentricity',
@@ -29,6 +66,7 @@ const columns = [
     editable: true,
     align: 'left',
     headerAlign: 'left',
+    valueFormatter: formatOrbitalElementValue,
   },
   {
     field: 'inclination',
@@ -38,59 +76,73 @@ const columns = [
     editable: true,
     align: 'left',
     headerAlign: 'left',
+    valueFormatter: formatOrbitalElementValue,
   },
   {
-    field: 'ascendingnodelongitude',
+    field: 'ascendingNodeLongitude',
     headerName: 'Longitud del nodo ascendente',
     type: 'number',
     width: 160,
     editable: true,
     align: 'left',
     headerAlign: 'left',
+    valueFormatter: formatOrbitalElementValue,
   },
   {
-    field: 'perihelionargument',
+    field: 'perihelionArgument',
     headerName: 'Argumento del perihelio',
     type: 'number',
     width: 160,
     editable: true,
     align: 'left',
     headerAlign: 'left',
+    valueFormatter: formatOrbitalElementValue,
   },
   {
-    field: 'perihelionpassingtime',
+    field: 'perihelionPassingTime',
     headerName: 'Tiempo de paso por el perihelio',
     type: 'number',
-    width: 190,
+    width: 200,
     editable: true,
     align: 'left',
     headerAlign: 'left',
+    valueFormatter: formatOrbitalElementValue,
   },
 ];
 
 export default function OrbitalElementsTable({ orbitalElementsList }) {
+  const validateRowUpdate = useUpdateValidation();
+
   const [snackbar, setSnackbar] = React.useState(null);
 
   const handleCloseSnackbar = () => setSnackbar(null);
 
-  const processRowUpdate = async (newRow) => {
-    console.log(newRow);
-    return newRow;
-  };
+  const processRowUpdate = React.useCallback(
+    async (newRow, oldRow) => {
+      await validateRowUpdate(newRow);
+      await updateOrbitalElement({
+        row: newRow,
+        oldPlanetName: oldRow.planetName,
+      });
+      setSnackbar({
+        children: 'Campo actualizado satisfactoriamente',
+        severity: 'success',
+      });
+      return newRow;
+    },
+    [validateRowUpdate]
+  );
 
   const handleProcessRowUpdateError = React.useCallback((error) => {
     setSnackbar({ children: error.message, severity: 'error' });
   }, []);
 
   return (
-    <div style={{ height: 300, width: '85%', margin: 'auto' }}>
+    <div style={{ height: 300, width: '90%', margin: 'auto' }}>
       <DataGrid
         experimentalFeatures={{ newEditingApi: true }}
-        getRowId={(row) => row.planetname}
         rows={orbitalElementsList}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
         processRowUpdate={processRowUpdate}
         onProcessRowUpdateError={handleProcessRowUpdateError}
       />
