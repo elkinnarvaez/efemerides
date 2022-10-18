@@ -1,7 +1,12 @@
 const { response } = require('express');
 const { formatRows } = require('./helpers');
 const { connectToDatabaseClient } = require('../data/index');
-const { selectAll, update, insert } = require('../data/operations');
+const {
+  selectAll,
+  selectByPlanet,
+  update,
+  insert,
+} = require('../data/operations');
 
 const fetchAll = async (req, res = response) => {
   try {
@@ -15,6 +20,28 @@ const fetchAll = async (req, res = response) => {
     res.status(400).json({
       message: 'Orbital elements could not be retrieved successfully',
       error: err,
+    });
+  }
+};
+
+const fetchByPlanet = async (req, res = response) => {
+  try {
+    const { planetName } = req.params;
+    const client = await connectToDatabaseClient();
+    const rows = await selectByPlanet(client, planetName);
+    if (rows.length === 0) {
+      throw new Error('No orbital elements were found for the given planet');
+    }
+    res.status(200).json({
+      message: 'Planet orbital elements retrieved successfully',
+      planetOrbitalElements: rows[0],
+    });
+  } catch (err) {
+    res.status(400).json({
+      message:
+        err.message ||
+        'Planet orbital elements could not been retrieved successfully',
+      error: JSON.stringify(err, Object.getOwnPropertyNames(err)),
     });
   }
 };
@@ -53,6 +80,7 @@ const createRecord = async (req, res = response) => {
 
 module.exports = {
   fetchAll,
+  fetchByPlanet,
   updateRecord,
   createRecord,
 };
