@@ -28,7 +28,7 @@ const fetchByPlanet = async (req, res = response) => {
   try {
     const { planetName } = req.params;
     const client = await connectToDatabaseClient();
-    const rows = await selectByPlanet(client, planetName);
+    const rows = formatRows(await selectByPlanet(client, planetName));
     if (rows.length === 0) {
       throw new Error('No orbital elements were found for the given planet');
     }

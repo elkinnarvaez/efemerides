@@ -22,6 +22,28 @@ export async function fetchAllOrbitalElements() {
   });
 }
 
+export async function fetchPlanetOrbitalElements({ planetName }) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(
+        `/api/orbital-elements/fetch-by-planet/${planetName}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      const json = await response.json();
+      if (response.ok) {
+        return resolve(json.planetOrbitalElements);
+      } else {
+        throw new Error(json.message);
+      }
+    } catch (err) {
+      return reject(err);
+    }
+  });
+}
+
 export async function updateOrbitalElement({ row, oldPlanetName }) {
   return new Promise(async (resolve, reject) => {
     try {
